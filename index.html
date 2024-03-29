@@ -4,114 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Table</title>
-    <!-- <link rel="stylesheet" href="style.css" /> -->
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        width: 100vw;
-        height: 100vh;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        font-family: Arial, sans-serif;
-        margin-top: 40px;
-      }
-      th,
-      td {
-        padding: 12px 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-      }
-      th {
-        background-color: #000000;
-      }
-      tr:hover {
-        background-color: #0d0a20a1;
-      }
-      .container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .sidebar {
-        height: 100%;
-        width: 300px;
-        background-color: #150e31; 
-        border-right: 1.5px solid gray;
-      }
-      .lists {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        gap: 20px;
-        align-items: center;
-      }
-      
-      .lists>p:first-child {
-        margin-top: 30px;
-      }
-      .lists > p {
-        width: 100%;
-        font-size: 20px;
-        border-bottom: 1.5px solid gray;
-        color: #ffffff;
-        text-align: center;
-        font-weight: bold;
-        text-transform: uppercase;
-        padding-bottom: 15px;
-        cursor: pointer;
-      }
-      .lists > p:hover {
-        color: gray;
-      }
-      .content {
-        height: 100%;
-        width: calc(100% - 300px);
-        background-color: #150e31;
-        overflow-x: scroll;
-        color: white;
-      }
-      
-      .content::-webkit-scrollbar {
-        display: none;
-      }
-      .content>p {
-        width: 100%;
-        font-size: 20px;
-        margin-top: 40px;
-        color: #ffffff;
-        text-align: center;
-        font-weight: bold;
-        text-transform: uppercase;
-      }
-      
-      #number {
-        width: 200px;
-        height: 30px;
-        font-size: 25px;
-        font-weight: 500;
-        color: green;
-      }
-      #addRowsBtn {
-        width: 100px;
-        height: 30px;
-        font-size: 16px;
-        font-weight: 500;
-        color: green;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -121,6 +14,22 @@
   </head>
   <body>
     <div class="container">
+      <div class="hamburger">
+        <img src="./menu.png" alt="">
+      </div>
+
+      <div class="slider">
+        <div class="slider_lists">
+          <p class="slider_posts">Posts</p>
+          <p class="slider_comments">Comments</p>
+          <p class="slider_albums">Albums</p>
+          <p class="slider_photos">Photos</p>
+          <p class="slider_todos">Todos</p>
+          <p class="slider_users">Users</p>
+          <button>Close</button>
+        </div>
+      </div>
+
       <div class="sidebar">
         <div class="lists">
           <p class="posts">Posts</p>
@@ -141,215 +50,6 @@
     </div>
 
 
-    <script>
-      let tab_selected = "posts";
-      let data;
-      $(document).ready(() => {
-        let sidebarElement = [
-          "posts",
-          "comments",
-          "albums",
-          "photos",
-          "todos",
-          "users",
-        ];
-
-        const addDataInUI = (data) => {
-          console.log(tab_selected, data);
-          if (tab_selected === "posts") {
-            $("table tbody").remove();
-            let htmls = ``;
-            data.forEach((post) => {
-              htmls += `
-          <tr>
-            <td>${post.userId}</td>
-            <td>${post.id}</td>
-            <td>${post.title}</td>
-            <td>${post.body}</td>
-          </tr>
-        `;
-            });
-            $("table").append("<tbody>");
-            $("table tbody").append(htmls);
-          } else if (tab_selected === "comments") {
-            $("table tbody").remove();
-            let htmls = ``;
-            data.forEach((comment) => {
-              htmls += `
-          <tr>
-            <td>${comment.postId}</td>
-            <td>${comment.id}</td>
-            <td>${comment.name}</td>
-            <td>${comment.email}</td>
-            <td>${comment.body}</td>
-          </tr>
-        `;
-            });
-            $("table").append("<tbody>");
-            $("table tbody").append(htmls);
-          } else if (tab_selected === "albums") {
-            $("table tbody").remove();
-            let htmls = ``;
-            data.forEach((album) => {
-              htmls += `
-          <tr>
-            <td>${album.userId}</td>
-            <td>${album.id}</td>
-            <td>${album.title}</td>
-          </tr>
-        `;
-            });
-            $("table").append("<tbody>");
-            $("table tbody").append(htmls);
-          } else if (tab_selected === "todos") {
-            $("table tbody").remove();
-            let htmls = ``;
-            data.forEach((todo) => {
-              htmls += `
-          <tr>
-            <td>${todo.userId}</td>
-            <td>${todo.id}</td>
-            <td>${todo.title}</td>
-            <td>${todo.completed}</td>
-          </tr>
-        `;
-            });
-            $("table").append("<tbody>");
-            $("table tbody").append(htmls);
-          } else if (tab_selected === "users") {
-            $("table tbody").remove();
-            let htmls = ``;
-            data.forEach((user) => {
-              htmls += `
-          <tr>
-            <td>${user.id}</td>
-            <td>${user.name}</td>
-            <td>${user.userId}</td>
-            <td>${user.email}</td>
-            <td>${user.website}</td>
-            <td>${user.address.city}</td>
-          </tr>
-        `;
-            });
-            $("table").append("<tbody>");
-            $("table tbody").append(htmls);
-          } else if (tab_selected === "photos") {
-            $("table tbody").remove();
-            let htmls = ``;
-            data.forEach((photo) => {
-              htmls += `
-          <tr>
-            <td>${photo.albumId}</td>
-            <td>${photo.id}</td>
-            <td>${photo.title}</td>
-            <td>${photo.url}</td>
-            <td>${photo.thumbnailUrl}</td>
-          </tr>
-        `;
-            });
-            $("table").append("<tbody>");
-            $("table tbody").append(htmls);
-          }
-        };
-
-        const fetchingDataFromAPI = async (tab_selected) => {
-          let data = null;
-          await axios
-            .get(`https://jsonplaceholder.typicode.com/${tab_selected}`)
-            .then((response) => (data = response.data));
-          addDataInUI(data);
-        };
-
-        // initially fetching data for posts at first page
-        $("thead").append(`
-          <tr>
-            <th>UserId</th>
-            <th>Id</th>
-            <th>title</th>
-            <th>body</th>
-          </tr>
-        `);
-        fetchingDataFromAPI(tab_selected);
-
-        for (let i = 0; i < sidebarElement.length; i++) {
-          $("." + sidebarElement[i]).on("click", () => {
-            tab_selected = sidebarElement[i];
-            $(".content p").text(sidebarElement[i].toUpperCase());
-
-            if (tab_selected === "posts") {
-              $("thead tr").remove();
-              $("thead").append(`
-                <tr>
-                  <th>UserId</th>
-                  <th>Id</th>
-                  <th>title</th>
-                  <th>body</th>
-                </tr>
-              `);
-              data = fetchingDataFromAPI(tab_selected);
-            } else if (tab_selected === "comments") {
-              $("thead tr").remove();
-              $("thead").append(`
-                <tr>
-                  <th>PostId</th>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Body</th>
-                </tr>
-              `);
-              data = fetchingDataFromAPI(tab_selected);
-            } else if (tab_selected === "albums") {
-              $("thead tr").remove();
-              $("thead").append(`
-                <tr>
-                  <th>UserId</th>
-                  <th>Id</th>
-                  <th>Title</th>
-                </tr>
-              `);
-              data = fetchingDataFromAPI(tab_selected);
-            } else if (tab_selected === "photos") {
-              $("thead tr").remove();
-              $("thead").append(`
-                <tr>
-                  <th>albumId</th>
-                  <th>Id</th>
-                  <th>Title</th>
-                  <th>Url</th>
-                  <th>ThumbnailUrl</th>
-                </tr>
-              `);
-              data = fetchingDataFromAPI(tab_selected);
-            } else if (tab_selected === "todos") {
-              $("thead tr").remove();
-              $("thead").append(`
-                <tr>
-                  <th>UserId</th>
-                  <th>Id</th>
-                  <th>Title</th>
-                  <th>Completed</th>
-                </tr>
-              `);
-              data = fetchingDataFromAPI(tab_selected);
-            } else if (tab_selected === "users") {
-              $("thead tr").remove();
-              $("thead").append(`
-                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>UserId</th>
-                  <th>Email</th>
-                  <th>Website</th>
-                  <th>City</th>
-                </tr>
-              `);
-              data = fetchingDataFromAPI(tab_selected);
-            }
-          });
-        }
-      });
-    </script>
-    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
   </body>
 </html>

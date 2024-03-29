@@ -73,7 +73,6 @@ $(document).ready(() => {
           <tr>
             <td>${user.id}</td>
             <td>${user.name}</td>
-            <td>${user.userId}</td>
             <td>${user.email}</td>
             <td>${user.website}</td>
             <td>${user.address.city}</td>
@@ -189,7 +188,6 @@ $(document).ready(() => {
         <tr>
           <th>Id</th>
           <th>Name</th>
-          <th>UserId</th>
           <th>Email</th>
           <th>Website</th>
           <th>City</th>
@@ -201,16 +199,46 @@ $(document).ready(() => {
     })
   }
 
+
+
+  // ham 
+
+  $('.hamburger img').on('click', ()=>{
+    if($('.hamburger').css('display') === 'block') {
+      $('.hamburger').css('display', 'none')
+      $('.slider').css('display', 'flex')
+    }
+  })
+
+  $('.slider button').on('click', ()=>{
+      $('.hamburger').css('display', 'block')
+      $('.slider').css('display', 'none')
+  })
+
+  $('.slider_posts').on('click', ()=>{
+    $('.posts').click()
+    $('.slider button').click()
+  })
+  $('.slider_comments').on('click', ()=>{
+    $('.comments').click()
+    $('.slider button').click()
+  })
+  $('.slider_albums').on('click', ()=>{
+    $('.albums').click()
+    $('.slider button').click()
+  })
+  $('.slider_photos').on('click', ()=>{
+    $('.photos').click()
+    $('.slider button').click()
+  })
+  $('.slider_todos').on('click', ()=>{
+    $('.todos').click()
+    $('.slider button').click()
+  })
+  $('.slider_users').on('click', ()=>{
+    $('.users').click()
+    $('.slider button').click()
+  })
+
 })
 
-
-// if(tab_selected === 'posts') {
-//   $('thead').append(`
-//   <tr>
-//     <th>UserId</th>
-//     <th>Id</th>
-//     <th>title</th>
-//     <th>body</th>
-//   </tr>
-//   `)
-// }
